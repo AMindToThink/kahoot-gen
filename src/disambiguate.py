@@ -1,6 +1,7 @@
 import requests
 from typing import List
 import json
+import time
 
 endpointUrl = 'https://query.wikidata.org/sparql'
 version = '0.1.0'
@@ -79,11 +80,13 @@ class Disambiguate():
             print( "-", i,  entry.get("description"))
             i = i + 1
         # Taking user input and converting it to an integer
+        time.sleep(0.2)
         user_input = int(input("Enter the corresponding number you mean: "))
         print('The user input is:', user_input )
         answer = multiple_question.get(user_input)
         print("The selected answer:", answer[0], "and the Qid:", answer[1])
-        # return answer
+        print()
+        return answer
 if __name__ == "__main__":
     disambiguate = Disambiguate()
     disambiguate.getCollectAnswerQid('Geese')
