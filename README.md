@@ -74,7 +74,7 @@ category_question: Inputs element(s) and finds 4 categories, one being the corre
 
 ## Disambiguate Class
 
-TO DO
+This class is used to search QId from the wiki data. The ssearch_cirrus helper functions takes in an input and search the wiki data for matching hits within the wiki data. It returns, the description, qids, timestamp and other related information for the input entered. The getCollectAnswerQid() helper methods displays the return items and asks for user input for help disambiguate what the specifically the user is querying. It then returns the Qid of the entered input. The construct_query create a sparql query to construct rdf graph for the returned Qid. 
 
 ## Future Additions
 - Improving sister_category so that better sisters can be found. For example, sister categories could contain 1 to n-1 elements more often
