@@ -21,6 +21,12 @@ The next cell runs element_question. Input a topic, a number of wrong answer, an
 This class is where the bulk of reasoning occurs. It contains several helper methods and methods specifically related to the questions.
 It is initialized using a list of predicates that state how elements can be related to each other (e.g., subclass of, instance of, etc.). Additionally, during initialization, a URL wrapper (SPARQLWrapper) is set so that queries can be sent to wikidata. It also uses a Disambiguate class, which is described later on.
 
+## Relation Class
+A pair of QIDs. One is the predicate, the other is the object. An answer can satisfy the relation if answer predicate object is in Wikidata.
+
+## Question Class
+Has a Relation, a right answer, and a list of wrong answers, all represented with QIDs.
+
 ### General Helper Methods
 run_query: Takes in a correctly formatted query and requests its output
 
@@ -47,6 +53,15 @@ sister_element: Takes in element's ID and its category's ID and outputs related 
 Element -> Category+Elements
 
  Inspired by a friend who made a Kahoot where many of the answers were his name, our “Element Question Generator” takes a topic from user input and makes a question where the input is the correct answer. Give it a String for a topic, a number, and choose fast_mode=True or false. Fast mode takes some shortcuts to return an answer, sacrificing randomness and certainty that the other answers are actually wrong.
+
+### Element Question Answer checking
+check_answer_is_correct_pattern
+possible answer, predicate, object -> string
+Generates a pattern that matches if possible answer predicate object, or they satisfy one of our more complicated ways in which an answer can be right, through reasoning.
+
+check_answer_using_pattern
+possible_answer , relation -> boolean
+Asks whether the possible answer satisfies the relation using check_answer_is_correct_pattern.
 
 ### Category Question Generator
 Element(s) -> Categories
