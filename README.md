@@ -17,15 +17,15 @@ To get questions for different subjects, input a list of strings into category_q
 
 The next cell runs element_question. Input a topic, a number of wrong answer, and select fast or slow mode. After disambiguating the topic, it will output a question that has your topic as the correct answer. Answer by inputting the number associated with the answer you want to pick.
 
-## Generator Class
-This class is where the bulk of reasoning occurs. It contains several helper methods and methods specifically related to the questions.
-It is initialized using a list of predicates that state how elements can be related to each other (e.g., subclass of, instance of, etc.). Additionally, during initialization, a URL wrapper (SPARQLWrapper) is set so that queries can be sent to wikidata. It also uses a Disambiguate class, which is described later on.
-
 ## Relation Class
 A pair of QIDs. One is the predicate, the other is the object. An answer can satisfy the relation if answer predicate object is in Wikidata.
 
 ## Question Class
 Has a Relation, a right answer, and a list of wrong answers, all represented with QIDs.
+
+## Generator Class
+This class is where the bulk of reasoning occurs. It contains several helper methods and methods specifically related to the questions.
+It is initialized using a list of predicates that state how elements can be related to each other (e.g., subclass of, instance of, etc.). Additionally, during initialization, a URL wrapper (SPARQLWrapper) is set so that queries can be sent to wikidata. It also uses a Disambiguate class, which is described later on.
 
 ### General Helper Methods
 run_query: Takes in a correctly formatted query and requests its output
