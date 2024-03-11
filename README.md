@@ -19,17 +19,19 @@ sister_category: Takes in a category and element ID(s) and outputs related categ
 sister_element: Takes in element's ID and its category's ID and outputs related elements not in said category. Arguably cousin elements
 
 ### Element Question Generator
-####Element -> Category+Elements
+Element -> Category+Elements
+
 TO DO
 
 ### Category Question Generator
-####Element(s) -> Categories
+Element(s) -> Categories
 This set of methods allows the user to create a question based on the inputted element(s). The question will ask which category answer contains every inputted element. The answers will contain one category that contains all elements and another 3 that don't (could hold 0 to n-1)
 
 find_category: Inputs element ID(s) and outputs a category ID that they all belong to based on the inputted predicate
 category_question: Inputs element(s) and finds 4 categories, one being the correct answer that contains every element. Then prints the question
 
 ## Disambiguate Class
+
 TO DO
 
 ## Future Additions
