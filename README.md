@@ -2,6 +2,15 @@
 ## Description
 Creating trivia questions can be a time consuming process. Manually creating multiple choice questions involves choosing a topic, thinking of aspects of that topic, turning those aspects into question/correct answer pairs, and generating false answers to the question. An automated program could use the knowledge graph of Wikidata to automate any of these steps. We intend to create a system that takes a topic from the user and generates questions relevant to the topic.
 
+# How to use:
+cd into kahoot-gen.
+(Recommended: create a new conda environment)
+To get the packages:
+pip install -r REQUIREMENTS.txt
+Open question-generator.ipynb
+Run the cells in order.
+Cell 8
+
 ## Generator Class
 This class is where the bulk of reasoning occurs. It contains several helper methods and methods specifically related to the questions.
 It is initialized using a list of predicates that state how elements can be related to each other (e.g., subclass of, instance of, etc.). Additionally, during initialization, a URL wrapper (SPARQLWrapper) is set so that queries can be sent to wikidata. It also uses a Disambiguate class, which is described later on.
@@ -31,7 +40,7 @@ sister_element: Takes in element's ID and its category's ID and outputs related 
 ### Element Question Generator
 Element -> Category+Elements
 
-TO DO
+ Inspired by a friend who made a Kahoot where many of the answers were his name, our “Element Question Generator” takes a topic from user input and makes a question where the input is the correct answer. Give it a String for a topic, a number, and choose fast_mode=True or false. Fast mode takes some shortcuts to return an answer, sacrificing randomness and certainty that the other answers are actually wrong.
 
 ### Category Question Generator
 Element(s) -> Categories
