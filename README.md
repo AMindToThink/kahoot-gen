@@ -9,7 +9,13 @@ To get the packages:
 pip install -r REQUIREMENTS.txt
 Open question-generator.ipynb
 Run the cells in order.
-Cell 8
+
+The cell containing the following code will ask for user input. Input the number associated with  the option you want to choose.
+cat_q = generator.category_question(["baseball", "volleyball"])
+It will then ask you a question. Input the number associated with the answer you want to choose.
+To get questions for different subjects, input a list of strings into category_question you expect to be related in some way.
+
+The next cell runs element_question. Choose a number of fa
 
 ## Generator Class
 This class is where the bulk of reasoning occurs. It contains several helper methods and methods specifically related to the questions.
