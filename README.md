@@ -62,6 +62,8 @@ Asks whether the possible answer satisfies the relation using check_answer_is_co
 
 element_question: input an element label, number of wrong answers, and true or false for fast mode, and it will ask you a question where the correct answer is you original input.
 
+new_element_question: deprecated version of element_question. less complex but more similar to the categeory question generator
+
 classic_sister_topic: takes a topic QID, a list of relations the sister topics should not satisfy, a number of items to get, and a boolean for whether to turn on fast_mode.
 This is used to generate wrong answers for Element Question. fast_mode turns on more complicated reasoning to be sure the wrong answers are actually wrong and random, while without fast mode it only does a surface level check.
 
