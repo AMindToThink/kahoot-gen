@@ -1,6 +1,6 @@
 # kahoot-gen
 ## Description
-Creating trivia questions can be a time consuming process. Manually creating multiple choice questions involves choosing a topic, thinking of aspects of that topic, turning those aspects into question/correct answer pairs, and generating false answers to the question. An automated program could use the knowledge graph of Wikidata to automate any of these steps. We intend to create a system that takes a topic from the user and generates questions relevant to the topic.
+Creating trivia questions can be a time consuming process. Manually creating multiple choice questions involves choosing a topic, thinking of aspects of that topic, turning those aspects into question/correct answer pairs, and generating false answers to the question. We created an automated program to use the knowledge graph of Wikidata to take a topic from the user and automate the rest of the steps.
 
 # How to use:
 cd into kahoot-gen.
@@ -42,12 +42,9 @@ process_JSON: Outputs of SPARQLWrapper are slightly unclear. This method takes i
 
 random_items: Takes in a list of items and outputs a random subset of them
 
-
-
-
 sister_category: Takes in a category and element ID(s) and outputs related categories that don't contain the element(s)
 
-sister_element: Takes in element's ID and its category's ID and outputs related elements not in said category. Arguably cousin elements
+sister_element: Takes in element's ID and its category's ID and outputs related elements not in said category. Arguably cousin elements.
 
 ### Element Question Generator
 Element -> Category+Elements
@@ -63,6 +60,8 @@ check_answer_using_pattern
 possible_answer , relation -> boolean
 Asks whether the possible answer satisfies the relation using check_answer_is_correct_pattern.
 
+element_question: input an element label, number of wrong answers, and true or false for fast mode, and it will ask you a question where the correct answer is you original input.
+
 ### Category Question Generator
 Element(s) -> Categories
 
@@ -74,10 +73,12 @@ category_question: Inputs element(s) and finds 4 categories, one being the corre
 
 ## Disambiguate Class
 
-This class is used to search QId from the wiki data. The ssearch_cirrus helper functions takes in an input and search the wiki data for matching hits within the wiki data. It returns, the description, qids, timestamp and other related information for the input entered. The getCollectAnswerQid() helper methods displays the return items and asks for user input for help disambiguate what the specifically the user is querying. It then returns the Qid of the entered input. The construct_query create a sparql query to construct rdf graph for the returned Qid. 
+This class is used to search QId from the wiki data. The ssearch_cirrus helper functions takes in an input and search the wiki data for matching hits within the wiki data. It returns, the description, qids, timestamp and other related information for the input entered. The getCollectAnswerQid() helper methods displays the return items and asks for user input for help disambiguate what specifically the user is querying. It then returns the Qid of the entered input. The construct_query create a sparql query to construct rdf graph for the returned Qid. 
 
 ## Future Additions
 - Improving sister_category so that better sisters can be found. For example, sister categories could contain 1 to n-1 elements more often
 - Improving how categories are chosen. Due to limitations of the wikidata KB, some categories and elements are connected weirdly. Could use longer chains so that grandparents+ of elements are taken into account
 - Creating other ways to generate questions. Currently, only multiple choice is used. Could create fill-in-the-blank or true-or-false questions. Also could create other question generators, like a Predicate Question Generator (Predicate -> Category+Elements, AKA, input a predicate and output a random that category, one element that is within that category, and three that are in sister categories)
+- A next step would be to optimize our SPARQL queries to significantly reduce query execution times, ensuring that users receive prompt and efficient responses to their requests. 
+- We can also explore Wikidata to find more ways answers can be correct. For example, our code currently struggles with branches of math because we are not reasoning over the “part of” predicate.
 
