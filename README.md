@@ -87,3 +87,6 @@ This class is used to search QId from the wiki data. The ssearch_cirrus helper f
 - A next step would be to optimize our SPARQL queries to significantly reduce query execution times, ensuring that users receive prompt and efficient responses to their requests. 
 - We can also explore Wikidata to find more ways answers can be correct. For example, our code currently struggles with branches of math because we are not reasoning over the “part of” predicate.
 
+
+# AWS Lambda:
+Running bash make-zip-for-aws.sh creates a my_deployment_package_generated.zip file for uploading to lambda. If you want to include more scripts, add them to src/for_aws.txt. If you want more packages, add them to REQUIREMENTS-for-aws.txt. 

@@ -160,5 +160,4 @@ cython_debug/
 #.idea/
 
 # Deployment
-my_deployment*
-kahootvenv*
+my_deployment_package_generated.zip

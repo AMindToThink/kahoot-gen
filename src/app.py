@@ -11,6 +11,10 @@ def welcome():
     /disambiguate/<input_question> takes a word as <input_question> and gives some options with QIDs. 
     /question/for_answer/<QID> takes a QID as <QID> and gives a question with 3 wrong answers. You can also pass in the number of wrong answers and fast_mode as True or False."""
 
+@app.route("/credits")
+def credits():
+    return "Created by Matthew Khoriaty, Ben Geduld, Anabella Isaro, and Zachary Siedlecki for Northwestern University's CS371 Knowledge Representation and Reasoning with Professor Forbus.\nRuns off of the Wikidata API."
+
 @app.route("/disambiguate/<input_question>")
 def disambiguate(input_question:str):
     """Get request that takes disambiguation options
