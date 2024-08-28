@@ -1,7 +1,7 @@
 from flask import Flask
 # jsonify is a function that returns a json response
 from flask import jsonify
-import awsgi
+import aws_lambda_wsgi
 app = Flask(__name__)
 
 @app.route("/help")
@@ -36,7 +36,4 @@ def question_for_answer(QID:str, num_wrong_answers:int, fast_mode:bool):
 # The Lambda handler function
 def lambda_handler(event, context):
     print("Received event:", event)
-    if 'httpMethod' not in event:
-        event['httpMethod'] = event['requestContext']['http']['method']
-        event['path'] = event['requestContext']['http']['path']
-    return awsgi.response(app, event, context)
+    return aws_lambda_wsgi.response(app, event, context)
