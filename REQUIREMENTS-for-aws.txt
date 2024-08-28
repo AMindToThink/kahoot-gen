@@ -1,0 +1,4 @@
+requests
+SPARQLWrapper
+flask
+aws_lambda_wsgi

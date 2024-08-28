@@ -4,9 +4,7 @@
 # In[1]:
 
 
-import requests
 from SPARQLWrapper import SPARQLWrapper, JSON
-import pandas
 import question
 import random
 import time
@@ -352,10 +350,28 @@ class Generator:
         Returns:
             None
         '''
+        import pandas
         df = pandas.DataFrame.from_dict(results["results"]["bindings"][:n_items])
         df = df.applymap(lambda x: x["value"])
         pandas.set_option('display.max_rows', n_items) # n_items doesnt work here
         print(df)
+    def construct_print_question(self, question) -> str:
+        '''
+        Description:
+            Takes in a question and outputs a string to be printed
+        
+        Arguments:
+            question:Question
+        
+        Returns:
+            string
+        '''
+        result = f"Which of the following is a {self.find_label_by_ID(question.relation.predicate)} {self.find_label_by_ID(question.relation.object)}?\n"
+        result += str(question.all_answers) + "\n"
+        for index, answer in enumerate(question.all_answers, 1):
+            result += f"{index}. {self.find_label_by_ID(answer)}\n"
+        return result
+    
     def print_question(self, question):
         '''
         Description:
@@ -367,11 +383,12 @@ class Generator:
         Returns:
             None
         '''
-        print(f"Which of the following is a {self.find_label_by_ID(question.relation.predicate)} {self.find_label_by_ID(question.relation.object)}?")
+        # print(f"Which of the following is a {self.find_label_by_ID(question.relation.predicate)} {self.find_label_by_ID(question.relation.object)}?")
        
-        print(question.all_answers)
-        for index, answer in enumerate(question.all_answers):
-            print(f"{index + 1}. {self.find_label_by_ID(answer)}")
+        # print(question.all_answers)
+        # for index, answer in enumerate(question.all_answers):
+        #     print(f"{index + 1}. {self.find_label_by_ID(answer)}")
+        print(self.construct_print_question(question))
    
     # Element-> Category+Elements Question Methods
     '''
@@ -466,11 +483,27 @@ class Generator:
         random_sister_topics = random.sample(sister_topics, count)
         return [topic["item"]["value"].split("/")[-1] for topic in random_sister_topics]
     
+    def question_about_X_from_QID(self, elementID, num_wrong_answers=3, fast_mode=True):
+        raise NotImplementedError()
+        relation = self.get_category_relation(elementID)
+        sisters = self.classic_sister_topic(elementID, [relation], num_wrong_answers, fast_mode)
+        # now to find a 
+        pass
+
+    def element_question_from_QID(self, elementID, num_wrong_answers=3, fast_mode=True):
+        relation = self.get_category_relation(elementID)
+        categoryID = relation.object
+        wrong_answers = self.classic_sister_topic(elementID, [relation], num_wrong_answers, fast_mode)
+
+        selected_answers = self.random_sister_topic(wrong_answers, num_wrong_answers)
+        relation = question.Relation( relation.predicate, relation.object)
+        return question.Question(relation, elementID, selected_answers)
+        
     def element_question(self, element_label, num_wrong_answers=3, fast_mode=True):
         '''
         Description:
            Creates a question with the element as the correct answer
-        
+           Matthew prefers this over the "new_element_question" method because classic_sister_topic has the fast_mode option which when off really checks whether the wrong answers are wrong. 
         Arguments:
             element_label:string
             num_wrong_answers:int
@@ -479,19 +512,12 @@ class Generator:
             question:Question
         '''
         elementID = self.find_ID_by_label(element_label, user_input=True)
+        return self.element_question_from_QID(elementID, num_wrong_answers, fast_mode)
         
-        relation = self.get_category_relation(elementID)
-        categoryID = relation.object
-        wrong_answers = self.classic_sister_topic(elementID, [relation], num_wrong_answers, fast_mode)
-
-        selected_answers = self.random_sister_topic(wrong_answers, num_wrong_answers)
-        relation = question.Relation( relation.predicate, relation.object)
-        return question.Question(relation, elementID, selected_answers)
     def new_element_question(self, element_label, num_wrong_answers=3):
         '''
         Description:
            Creates a question with the element as the correct answer
-        
         Arguments:
             element_label:string
             num_wrong_answers:int

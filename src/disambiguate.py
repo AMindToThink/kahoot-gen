@@ -1,7 +1,6 @@
 import requests
 from typing import List
 import json
-from SPARQLWrapper import SPARQLWrapper
 
 class Disambiguate():
     def __init__(self):

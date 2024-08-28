@@ -5,6 +5,12 @@ class Relation():
         self.object = object
     def __str__(self):
         return "wdt:" + self.predicate + " wd:" + self.object
+    def to_dict(self):
+        """Converts the Relation object to a dictionary."""
+        return {
+            'predicate': self.predicate,
+            'object': self.object
+        }
 class Question():
     def __init__(self, relation, correct_answer, wrong_answers):
         self.relation = relation
@@ -16,3 +22,14 @@ class Question():
         
     def __str__(self):
         return self.relation.predicate + " " + self.relation.object + " " + self.correct_answer + " " + str(self.wrong_answers)
+    
+    def __dict__(self):
+        return {
+            "relation": self.relation.to_dict(),
+            "correct_answer": self.correct_answer,
+            "wrong_answers": self.wrong_answers,
+            "all_answers": self.all_answers,
+            "correct_index": self.correct_index
+        }
+    
+
